@@ -19,7 +19,7 @@ using your favorate plugin manager, for example packer
 ```lua
 use {
 	"LintaoAmons/lazymark.nvim",
-	-- tag = "v0.3.2" -- use tag for stability, or without this to have latest fixed and functions
+	-- tag = "v0.1.0" -- use tag for stability, or without this to have latest fixed and functions
 }
 ```
 
