@@ -1,5 +1,6 @@
 local M = {}
 
+table.unpack = table.unpack or unpack
 -- local commands = {
 -- 	{
 -- 		name = "Lazymark",
