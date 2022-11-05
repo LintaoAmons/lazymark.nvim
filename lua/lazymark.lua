@@ -13,4 +13,15 @@ M.mark = function()
   vim.cmd(":call writefile" .. '(["' .. mark .. '"],"' .. markPersistency .. '")')
 end
 
+local commands = {
+  {
+    name = "Lazymark",
+    callback = M.mark,
+  },
+}
+
+for _, v in ipairs(commands) do
+  vim.api.nvim_create_user_command(v.name, v.callback, {})
+end
+
 return M
