@@ -82,6 +82,6 @@ M.mark = function()
 	end
 end
 
-initCommands()
+-- initCommands()
 
 return M
