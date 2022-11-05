@@ -7,9 +7,12 @@ M.setup = function()
 end
 
 M.mark = function()
+  print("start mark")
   local row, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+  print(row, col)
   local abspath = vim.api.nvim_buf_get_name(0)
   local mark = abspath .. "|" .. row .. "," .. col
+  print(mark)
   vim.cmd(":call writefile" .. '(["' .. mark .. '"],"' .. markPersistency .. '")')
 end
 
@@ -21,6 +24,7 @@ local commands = {
 }
 
 for _, v in ipairs(commands) do
+  print("setup commands")
   vim.api.nvim_create_user_command(v.name, v.callback, {})
 end
 
