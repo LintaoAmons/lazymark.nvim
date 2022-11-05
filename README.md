@@ -36,7 +36,7 @@ vim.keymap.set("n", "ma", function() require("lazymark").mark() end)
 ### LazymarkGoToMark
 
 ```lua
-vim.keymap.set("n", "ma", function() require("lazymark").gotoMark() end)
+vim.keymap.set("n", "'a", function() require("lazymark").gotoMark() end)
 ```
 
 ### LazymarkCheckCurrentMark

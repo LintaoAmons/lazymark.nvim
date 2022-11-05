@@ -15,6 +15,12 @@ local commands = {
 	},
 }
 
+local function initCommands()
+	for _, v in ipairs(commands) do
+		vim.api.nvim_create_user_command(v.name, v.callback, {})
+	end
+end
+
 local markPersistency = vim.fn.stdpath("cache") .. "/lazymark.nvim"
 
 local function getRawMark()
@@ -76,6 +82,6 @@ M.mark = function()
 	end
 end
 
-for _, v in ipairs(commands) do
-	vim.api.nvim_create_user_command(v.name, v.callback, {})
-end
+initCommands()
+
+return M
