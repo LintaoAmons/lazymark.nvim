@@ -1,1 +1,1 @@
-print("hello, lazymark")
+print "hello, lazymark"
