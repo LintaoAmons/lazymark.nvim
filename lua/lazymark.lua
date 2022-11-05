@@ -42,6 +42,13 @@ local function isMarkExists(rawMark)
 	return false
 end
 
+local function markCurrentLocation()
+	local row, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+	local abspath = vim.api.nvim_buf_get_name(0)
+	local mark = abspath .. "|" .. row .. "," .. col
+	vim.cmd(":call writefile" .. '(["' .. mark .. '"],"' .. markPersistency .. '")')
+end
+
 M.check = function()
 	vim.notify(vim.inspect(parseMark(getRawMark())))
 end
@@ -51,13 +58,6 @@ M.gotoMark = function()
 	local parsedMark = parseMark(rawMark)
 	vim.cmd(":e " .. parsedMark.filename)
 	vim.api.nvim_win_set_cursor(0, parsedMark.location)
-end
-
-local function markCurrentLocation()
-	local row, col = table.unpack(vim.api.nvim_win_get_cursor(0))
-	local abspath = vim.api.nvim_buf_get_name(0)
-	local mark = abspath .. "|" .. row .. "," .. col
-	vim.cmd(":call writefile" .. '(["' .. mark .. '"],"' .. markPersistency .. '")')
 end
 
 M.mark = function()
