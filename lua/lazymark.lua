@@ -7,7 +7,7 @@ local commands = {
 	},
 	{
 		name = "LazymarkGoToMark",
-		callback = M.goToMark,
+		callback = M.gotoMark,
 	},
 }
 
@@ -27,7 +27,7 @@ local function parseMark(mark)
 	return parsedResult
 end
 
-M.goToMark = function()
+M.gotoMark = function()
 	local persistedMark = vim.fn.readfile(markPersistency)[1]
 	local parsedMark = parseMark(persistedMark)
 	vim.cmd(":e " .. parsedMark.filename)
