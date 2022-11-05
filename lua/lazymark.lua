@@ -1,25 +1,25 @@
 local M = {}
 
-local commands = {
-	{
-		name = "Lazymark",
-		callback = M.mark,
-	},
-	{
-		name = "LazymarkGoToMark",
-		callback = M.gotoMark,
-	},
-	{
-		name = "LazymarkCheckCurrentMark",
-		callback = M.check,
-	},
-}
-
-local function initCommands()
-	for _, v in ipairs(commands) do
-		vim.api.nvim_create_user_command(v.name, v.callback, {})
-	end
-end
+-- local commands = {
+-- 	{
+-- 		name = "Lazymark",
+-- 		callback = M.mark,
+-- 	},
+-- 	{
+-- 		name = "LazymarkGoToMark",
+-- 		callback = M.gotoMark,
+-- 	},
+-- 	{
+-- 		name = "LazymarkCheckCurrentMark",
+-- 		callback = M.check,
+-- 	},
+-- }
+--
+-- local function initCommands()
+-- 	for _, v in ipairs(commands) do
+-- 		vim.api.nvim_create_user_command(v.name, v.callback, {})
+-- 	end
+-- end
 
 local markPersistency = vim.fn.stdpath("cache") .. "/lazymark.nvim"
 
