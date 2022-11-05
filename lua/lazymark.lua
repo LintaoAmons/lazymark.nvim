@@ -48,8 +48,7 @@ local function isMarkExists(rawMark)
 	return false
 end
 
-local function markCurrentLocation()
-	local row, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+local function markCurrentLocation(row, col)
 	local abspath = vim.api.nvim_buf_get_name(0)
 	local mark = abspath .. "|" .. row .. "," .. col
 	vim.cmd(":call writefile" .. '(["' .. mark .. '"],"' .. markPersistency .. '")')
@@ -68,17 +67,18 @@ end
 
 M.mark = function()
 	local rawMark = getRawMark()
+	local row, col = table.unpack(vim.api.nvim_win_get_cursor(0))
 	if isMarkExists(rawMark) then
 		vim.ui.input({
 			prompt = "Sure to overwrite current mark? y/N",
 		}, function(userChoose)
 			if userChoose == "y" then
-				markCurrentLocation()
+				markCurrentLocation(row, col)
 				vim.notify("Preview mark at: " .. rawMark .. " is overwrited")
 			end
 		end)
 	else
-		markCurrentLocation()
+		markCurrentLocation(row, col)
 	end
 end
 
