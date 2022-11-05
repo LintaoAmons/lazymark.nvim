@@ -6,8 +6,8 @@ M.setup = function()
   print("Hello lazymark")
 end
 
-M.readFile = function ()
-  local test = readfile(markPersistency)[0]
+M.readFile = function()
+  local test = vim.fn.readfile(markPersistency)[0]
   print(test)
 end
 
