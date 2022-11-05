@@ -6,6 +6,11 @@ M.setup = function()
   print("Hello lazymark")
 end
 
+M.readFile = function ()
+  local test = readfile(markPersistency)[0]
+  print(test)
+end
+
 M.mark = function()
   local row, col = table.unpack(vim.api.nvim_win_get_cursor(0))
   local abspath = vim.api.nvim_buf_get_name(0)
