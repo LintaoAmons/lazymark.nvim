@@ -51,3 +51,6 @@ I'm a nvim and lua newbie, please help me with:
 
 - [ ] Why can't find my commands, after installed the plugin?
 
+## TODO
+
+- [ ] Change ask before overwrite behavior to undo overwrited marks for more smooth experience.
