@@ -27,18 +27,11 @@ local function parseMark(mark)
 	return parsedResult
 end
 
-local function log(value)
-	print(vim.inspect(value))
-end
-
 local function getRawMark()
 	return vim.fn.readfile(markPersistency)[1]
 end
 
 local function isMarkExists(rawMark)
-	log(rawMark)
-	log(string.len(rawMark))
-	log(string.len(rawMark) > 0)
 	if string.len(rawMark) > 0 then
 		return true
 	end
