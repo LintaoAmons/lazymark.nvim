@@ -31,6 +31,10 @@ local function log(value)
 	print(vim.inspect(value))
 end
 
+local function getRawMark()
+	return vim.fn.readfile(markPersistency)[1]
+end
+
 local function isMarkExists(rawMark)
 	log(rawMark)
 	log(string.len(rawMark))
@@ -42,8 +46,8 @@ local function isMarkExists(rawMark)
 end
 
 M.gotoMark = function()
-	local persistedMark = vim.fn.readfile(markPersistency)[1]
-	local parsedMark = parseMark(persistedMark)
+	local rawMark = getRawMark()
+	local parsedMark = parseMark(rawMark)
 	vim.cmd(":e " .. parsedMark.filename)
 	vim.api.nvim_win_set_cursor(0, parsedMark.location)
 end
@@ -56,14 +60,14 @@ local function markCurrentLocation()
 end
 
 M.mark = function()
-	local persistedMark = vim.fn.readfile(markPersistency)[1]
-	if isMarkExists(persistedMark) then
+	local rawMark = getRawMark()
+	if isMarkExists(rawMark) then
 		vim.ui.input({
 			prompt = "Sure to overwrite current mark? y/N",
 		}, function(userChoose)
 			if userChoose == "y" then
 				markCurrentLocation()
-				vim.notify("Preview mark at: " .. persistedMark .. " is overwrited")
+				vim.notify("Preview mark at: " .. rawMark .. " is overwrited")
 			end
 		end)
 	else
