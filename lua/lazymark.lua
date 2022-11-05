@@ -9,9 +9,17 @@ local commands = {
 		name = "LazymarkGoToMark",
 		callback = M.gotoMark,
 	},
+	{
+		name = "LazymarkCheckCurrentMark",
+		callback = M.check,
+	},
 }
 
 local markPersistency = vim.fn.stdpath("cache") .. "/lazymark.nvim"
+
+local function getRawMark()
+	return vim.fn.readfile(markPersistency)[1]
+end
 
 local function parseMark(mark)
 	local parsedResult = {}
@@ -27,15 +35,15 @@ local function parseMark(mark)
 	return parsedResult
 end
 
-local function getRawMark()
-	return vim.fn.readfile(markPersistency)[1]
-end
-
 local function isMarkExists(rawMark)
 	if string.len(rawMark) > 0 then
 		return true
 	end
 	return false
+end
+
+M.check = function()
+	vim.notify(vim.inspect(parseMark(getRawMark())))
 end
 
 M.gotoMark = function()
@@ -71,5 +79,3 @@ end
 for _, v in ipairs(commands) do
 	vim.api.nvim_create_user_command(v.name, v.callback, {})
 end
-
-return M
