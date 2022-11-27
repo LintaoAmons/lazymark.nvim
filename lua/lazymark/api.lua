@@ -44,7 +44,7 @@ M.rollbackMark = function()
 	end
 
 	local rollbacked = { table.unpack(markStrings, 1, #markStrings - 1) }
-	FsUtils.writeFileSync(io.open(getDoMarkHistoryPath()), rollbacked)
+	FsUtils.writeFileSync(getDoMarkHistoryPath(), rollbacked)
 
 	FsUtils.appendFileSync(getUndoMarkHistoryPath(), markStrings[#markStrings])
 end
