@@ -16,7 +16,7 @@ local function getUndoMarkHistoryPath()
 end
 
 local function getDoMarkHistory()
-	return vim.fn.readfile(do_mark_history)[1]
+	return vim.fn.readfile(getDoMarkHistoryPath())
 end
 
 local function saveMark(row, col)
@@ -26,8 +26,8 @@ local function saveMark(row, col)
 end
 
 M.gotoMark = function()
-	local markString = getDoMarkHistory()
-	local parsedMark = MarkString.parse(markString)
+	local markStrings = getDoMarkHistory()
+	local parsedMark = MarkString.parse(markStrings[#markStrings])
 	vim.cmd(":e " .. parsedMark.filename)
 	vim.api.nvim_win_set_cursor(0, parsedMark.location)
 end
