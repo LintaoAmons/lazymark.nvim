@@ -27,6 +27,9 @@ end
 
 M.gotoMark = function()
 	local markStrings = getDoMarkHistory()
+	if #markStrings == 0 then
+		vim.notify("No bookmark yet")
+	end
 	local parsedMark = MarkString.parse(markStrings[#markStrings])
 	vim.cmd(":e " .. parsedMark.filename)
 	vim.api.nvim_win_set_cursor(0, parsedMark.location)
