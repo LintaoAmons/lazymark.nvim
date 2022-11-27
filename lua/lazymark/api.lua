@@ -1,4 +1,5 @@
 local MarkString = require("lazymark.mark-string")
+local FsUtils = require("lazymark.fs-utils")
 
 local M = {}
 
@@ -10,18 +11,12 @@ local do_mark_history = vim.g.lazymark_settings.persist_mark_dir .. "/doMarkHist
 
 local undo_mark_history = vim.g.lazymark_settings.persist_mark_dir .. "/undoMarkHistory"
 
-local initDir = function()
-	if vim.fn.isdirectory(config.persist_mark_dir) == 0 then
-		vim.fn.mkdir(config.persist_mark_dir, "p")
-	end
-end
-
 local function getDoMarkHistory()
 	return vim.fn.readfile(do_mark_history)[1]
 end
 
 local function addMark(row, col)
-	initDir()
+	FsUtils.initDir(config.persist_mark_dir)
 
 	local markString = MarkString.build(vim.api.nvim_buf_get_name(0), row, col)
 	-- todo: append new mark in last line of file

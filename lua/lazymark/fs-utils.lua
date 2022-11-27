@@ -2,6 +2,12 @@ local M = {}
 
 local uv = vim.loop
 
+M.initDir = function(path)
+	if vim.fn.isdirectory(path) == 0 then
+		vim.fn.mkdir(path, "p")
+	end
+end
+
 M.readFileSync = function(path)
 	local fd = assert(uv.fs_open(path, "r", 438))
 	local stat = assert(uv.fs_fstat(fd))
