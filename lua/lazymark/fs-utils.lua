@@ -14,10 +14,8 @@ end
 
 M.writeFileSync = function(path, lines)
 	local fd = assert(io.open(path, "w"))
-	for index, value in ipairs(lines) do
-		if index ~= #lines then
-			fd:write(value .. "\n")
-		end
+	for _, value in ipairs(lines) do
+		fd:write(value .. "\n")
 	end
 	fd:close()
 end

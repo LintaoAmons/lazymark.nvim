@@ -38,7 +38,8 @@ M.rollbackMark = function()
 		vim.notify("Can't rollback, no more mark history")
 	end
 
-	FsUtils.writeFileSync(io.open(getDoMarkHistoryPath()), markStrings)
+	local rollbacked = { table.unpack(markStrings, 1, #markStrings - 1) }
+	FsUtils.writeFileSync(io.open(getDoMarkHistoryPath()), rollbacked)
 end
 
 M.mark = function()
