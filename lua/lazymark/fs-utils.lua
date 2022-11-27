@@ -16,9 +16,9 @@ M.readFileSync = function(path)
 	return data
 end
 
-M.appendFileSync = function(path)
+M.appendFileSync = function(path, content)
 	local fd = assert(uv.fs_open(path, "a", 438))
-	local data = assert(uv.fs_write(fd, "test_content"))
+	local data = assert(uv.fs_write(fd,content))
 	assert(uv.fs_close(fd))
 	return data
 end

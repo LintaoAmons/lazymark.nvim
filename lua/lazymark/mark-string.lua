@@ -19,10 +19,10 @@ M.parse = function(markString)
 	return parsedMark
 end
 
--- markString example: 
+-- markString example:
 -- /Users/lintao.zhang/.config/nvim/lua/user/my-plugin/init.lua|30,4
 M.build = function(abspath, row, col)
-	return abspath .. "|" .. row .. "," .. col
+	return abspath .. "|" .. row .. "," .. col .. "\n"
 end
 
 return M

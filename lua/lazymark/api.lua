@@ -7,20 +7,22 @@ table.unpack = table.unpack or unpack
 
 local config = vim.g.lazymark_settings
 
-local do_mark_history = vim.g.lazymark_settings.persist_mark_dir .. "/doMarkHistory"
+local function getDoMarkHistoryPath()
+	return vim.g.lazymark_settings.persist_mark_dir .. "/doMarkHistory"
+end
 
-local undo_mark_history = vim.g.lazymark_settings.persist_mark_dir .. "/undoMarkHistory"
+local function getUndoMarkHistoryPath()
+	return vim.g.lazymark_settings.persist_mark_dir .. "/undoMarkHistory"
+end
 
 local function getDoMarkHistory()
 	return vim.fn.readfile(do_mark_history)[1]
 end
 
-local function addMark(row, col)
+local function saveMark(row, col)
 	FsUtils.initDir(config.persist_mark_dir)
-
 	local markString = MarkString.build(vim.api.nvim_buf_get_name(0), row, col)
-	-- todo: append new mark in last line of file
-	vim.cmd(":call writefile" .. '(["' .. markString .. '"],"' .. do_mark_history .. '")')
+	FsUtils.appendFileSync(getDoMarkHistoryPath(), markString)
 end
 
 M.gotoMark = function()
@@ -32,7 +34,7 @@ end
 
 M.mark = function()
 	local row, col = table.unpack(vim.api.nvim_win_get_cursor(0))
-	addMark(row, col)
+	saveMark(row, col)
 end
 
 return M
