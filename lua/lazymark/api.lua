@@ -29,6 +29,7 @@ M.gotoMark = function()
 	local markStrings = getDoMarkHistory()
 	if #markStrings == 0 then
 		vim.notify("No bookmark yet")
+		return
 	end
 	local parsedMark = MarkString.parse(markStrings[#markStrings])
 	vim.cmd(":e " .. parsedMark.filename)
@@ -39,6 +40,7 @@ M.rollbackMark = function()
 	local markStrings = getDoMarkHistory()
 	if #markStrings == 0 then
 		vim.notify("Can't rollback, no more mark history")
+		return
 	end
 
 	local rollbacked = { table.unpack(markStrings, 1, #markStrings - 1) }
