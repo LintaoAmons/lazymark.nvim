@@ -27,30 +27,41 @@ I will continue add some changes to main branch, so if you meet some issue due t
 
 ## Commands | Keymappings | Functions
 
-### Lazymark
+### Mark
 
 ```lua
 vim.keymap.set("n", "ma", function() require("lazymark").mark() end)
 ```
 
-### LazymarkGoToMark
+### GoToMark
 
 ```lua
 vim.keymap.set("n", "'a", function() require("lazymark").gotoMark() end)
 ```
 
-### LazymarkCheckCurrentMark
+### UndoMark
 
 ```lua
-:lua require("lazymark").check()
+vim.keymap.set("n", "'a", function() require("lazymark").undoMark() end)
+```
+
+### RedoMark
+
+```lua
+vim.keymap.set("n", "'a", function() require("lazymark").redoMark() end)
 ```
 
 ## Need help
 
-I'm a nvim and lua newbie, please help me with:
+### Easy task
 
-- [ ] Why can't find my commands, after installed the plugin?
+If you want to contribute to this plugin, I have some easy task ready for you~
 
-## TODO
+Search the content in the following list, I embeded some `todo`s in the repo.
 
-- [ ] Change ask before overwrite behavior to undo overwrited marks for more smooth experience.
+- [ ] todo#1: refactor `undo` and `redo`
+
+### TODO
+
+- [x] Change ask before overwrite behavior to undo overwrited marks for more smooth experience.
+- [ ] dir to group marks

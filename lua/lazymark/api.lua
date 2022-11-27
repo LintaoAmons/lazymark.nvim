@@ -36,6 +36,7 @@ M.gotoMark = function()
 	vim.api.nvim_win_set_cursor(0, parsedMark.location)
 end
 
+-- todo#1: refactor `undo` and `redo`
 M.undoMark = function()
 	local markHistory = getDoMarkHistory()
 	if #markHistory == 0 then
