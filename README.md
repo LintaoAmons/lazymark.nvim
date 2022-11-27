@@ -25,6 +25,14 @@ use {
 
 I will continue add some changes to main branch, so if you meet some issue due to new changes, you can just downgrade to your former version.
 
+## Config
+
+Just change the global vim variable.
+
+```lua
+vim.g.lazymark_settings.persist_mark_dir = vim.fn.stdpath("cache") .. "/lazymark.nvim",
+```
+
 ## Commands | Keymappings | Functions
 
 ### Mark
@@ -63,5 +71,6 @@ Search the content in the following list, I embeded some `todo`s in the repo.
 
 ### TODO
 
-- [x] Change ask before overwrite behavior to undo overwrited marks for more smooth experience.
+- [ ] Make the `undo` and `redo` function able to use with vim original `u` and `<C-r>`
 - [ ] dir to group marks
+- [x] Change ask before overwrite behavior to undo overwrited marks for more smooth experience.
