@@ -36,17 +36,30 @@ M.gotoMark = function()
 	vim.api.nvim_win_set_cursor(0, parsedMark.location)
 end
 
-M.rollbackMark = function()
-	local markStrings = getDoMarkHistory()
-	if #markStrings == 0 then
+M.undoMark = function()
+	local markHistory = getDoMarkHistory()
+	if #markHistory == 0 then
 		vim.notify("Can't rollback, no more mark history")
 		return
 	end
 
-	local rollbacked = { table.unpack(markStrings, 1, #markStrings - 1) }
+	local rollbacked = { table.unpack(markHistory, 1, #markHistory - 1) }
 	FsUtils.writeFileSync(getDoMarkHistoryPath(), rollbacked)
 
-	FsUtils.appendFileSync(getUndoMarkHistoryPath(), markStrings[#markStrings])
+	FsUtils.appendFileSync(getUndoMarkHistoryPath(), markHistory[#markHistory])
+end
+
+M.redoMark = function()
+	local undoHistory = FsUtils.readFile(getUndoMarkHistoryPath())
+	if #undoHistory == 0 then
+		vim.notify("No more undo history")
+		return
+	end
+
+	local undoHistoryNew = { table.unpack(undoHistory, 1, #undoHistory - 1) }
+	FsUtils.writeFileSync(getUndoMarkHistoryPath(), undoHistoryNew)
+
+	FsUtils.appendFileSync(getDoMarkHistoryPath(), undoHistory[#undoHistory])
 end
 
 M.mark = function()
